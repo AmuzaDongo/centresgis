@@ -133,7 +133,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EAFLET_CONFIG = {
+LEAFLET_CONFIG = {
     'TILES': 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     'DEFAULT_CENTER':(0.919075802, 32.58531551),
     'DEFAULT_ZOOM': 6,
