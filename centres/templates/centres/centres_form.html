@@ -1,0 +1,15 @@
+{% extends 'centres/base.html' %}
+{% load leaflet_tags %}
+{% block content %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% load l10n %}
+
+
+{% leaflet_js %}
+{% leaflet_css %}    
+
+<div class="row">
+<span class='py-2'>{% crispy form %}</span>
+</div>
+{% endblock content %}

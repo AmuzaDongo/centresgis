@@ -1,0 +1,42 @@
+{% extends 'centres/base.html' %}
+{% load leaflet_tags %}
+{% block content %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% load l10n %}
+
+
+{% leaflet_js %}
+{% leaflet_css %}    
+
+<div class="row">
+<span class='py-2'>{% crispy form form.helper %}</span>
+</div>
+<div class="row">
+    <a class="btn btn-secondary" href="{% url 'staions-home' %}">Police Stations</a>
+    <table class='table table-hover table-sm'>
+    <tr><td>#</td><td>CentreNo</td><td>CentreName</td><td>Station Name</td></tr>
+    {% for centre in centreslist %}
+    <tr><td>{{forloop.counter}}</td><td>{{centre.centreno}}</td><td>{{centre.centrename}}</td><td>{{centre.station}}</td></tr>
+    {% endfor %}
+    </table>
+</div>
+<div class="row">
+<div class="col">
+    <h1>Map of centres</h1>
+    {% leaflet_map "yourmap" callback="window.map_init_basic" %}
+</div>
+</div>
+    <script type="text/javascript">
+        function map_init_basic (map, options) {
+            var marker = null;
+            {% for centre in centreslist %}
+            var lon = "{{ centre.location.x }}";
+            var lat = "{{ centre.location.y }}";
+            var popup = L.popup({closeOnClick: false, autoClose: false}).setContent("{{ centre.centrename}}")
+            // zoom to point & add it to map
+            var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup();
+            {% endfor %}
+            }
+    </script>
+{% endblock content %}
