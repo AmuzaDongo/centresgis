@@ -54,7 +54,10 @@ class CentreUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from centres.serializers import CentresSerializer
+from rest_framework.filters import OrderingFilter, SearchFilter
 
 class CentresViewSet(ReadOnlyModelViewSet):
     queryset = Centres.objects.select_related()
     serializer_class = CentresSerializer
+    filter_backend = (SearchFilter, OrderingFilter)
+    serach_fields = ['centreno', 'centrename', 'station__stnno', 'station__stn_name']
