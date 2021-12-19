@@ -51,12 +51,16 @@ class LocationFilter(admin.SimpleListFilter):
             return queryset.filter(location__isnull=True)
 
 
+class AccreditationInline(admin.TabularInline):
+    model = Accreditation
+
 @admin.register(Centres)
 class CentresAdmin(LeafletGeoAdmin, ImportExportModelAdmin):
     list_display = ("centreno", "centrename","centre_head", "location", "station","owner","accreditation_staus")
     search_fields = ['centreno','centrename']
     list_filter = [LocationFilter,'owner','accreditation_staus','accreditation_staus',"station"]
     # list_editable = ['owner','accreditation_staus','location']
+    inlines = [AccreditationInline]
 
 @admin.register(PoliceStation)
 class PoliceStationAdmin(LeafletGeoAdmin, ImportExportModelAdmin):
@@ -84,7 +88,7 @@ class ProgramCategoryAdmin(LeafletGeoAdminMixin,ImportExportModelAdmin):
 
 @admin.register(Program)
 class ProgramAdmin(LeafletGeoAdminMixin,ImportExportModelAdmin):
-    pass
+    inlines = [AccreditationInline]
 
 
 @admin.register(Accreditation)

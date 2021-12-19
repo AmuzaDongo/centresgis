@@ -36,7 +36,7 @@ class person(models.Model):
 
 
 class District(models.Model):
-    # district_name = models.CharField(max_length=100)
+    district_name = models.CharField(max_length=100)
     distric_area = models.PolygonField(srid=4326, blank=True, null=True)
     district_notes = models.TextField(default="")
     district_centre = models.PointField(srid=4326, blank=True, null=True)
