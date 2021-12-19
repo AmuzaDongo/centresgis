@@ -1,5 +1,11 @@
 from django.urls import path
-from .views import centresview, stationsview, CentreCreateView, CentreUpdateView
+from .views import centresview, stationsview, CentreCreateView, CentreUpdateView, CentresViewSet
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+
+
+router.register(r'api/centres', CentresViewSet, basename="centres-api")
     
 urlpatterns = [
     path("", centresview, name='home'),
@@ -10,3 +16,5 @@ urlpatterns = [
     # path("station/<int:pk>/edit", TenancyUpdateView.as_view(), name='tenancy_edit'),
 
 ]
+
+urlpatterns += router.urls

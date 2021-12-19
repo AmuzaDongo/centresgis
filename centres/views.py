@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from rest_framework import serializers
 from .models import Centres, PoliceStation
 from .forms import centresForm
+
 
 # Create your views here.
 def centresview(request):
@@ -46,3 +48,13 @@ class CentreUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Centres
     success_message = "Rental Unit Updated Successfully"
     fields = ("__all__")
+
+
+
+
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from centres.serializers import CentresSerializer
+
+class CentresViewSet(ReadOnlyModelViewSet):
+    queryset = Centres.objects.select_related()
+    serializer_class = CentresSerializer
