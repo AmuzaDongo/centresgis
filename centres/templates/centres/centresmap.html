@@ -35,7 +35,8 @@
             var lat = "{{ centre.location.y }}";
             var popup = L.popup({closeOnClick: false, autoClose: false}).setContent("{{ centre.centrename}}")
             // zoom to point & add it to map
-            var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup();
+            {% comment %} var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup(); {% endcomment %}
+            var marker = L.circle([lat, lon]).addTo(map).bindPopup("{{ centre.centrename}}");
             {% endfor %}
             }
     </script>

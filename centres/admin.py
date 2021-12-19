@@ -3,7 +3,7 @@ from django.db.models.base import Model
 from leaflet.admin import LeafletGeoAdmin, LeafletGeoAdminMixin
 from django.urls import reverse
 from django.contrib import admin
-from .models import Region, PoliceStation, Centres, District
+from .models import Accreditation, Department, ExamSeries, Program, ProgramCategory, Region, PoliceStation, Centres, District
 from import_export.admin import ImportExportModelAdmin
 from django.utils.http import urlencode
 from django.utils.html import format_html
@@ -72,3 +72,26 @@ class DistrictAdmin(LeafletGeoAdmin,ImportExportModelAdmin):
 class RegionAdmin(LeafletGeoAdminMixin,ImportExportModelAdmin):
     pass
 
+@admin.register(Department)
+class DepartmentAdmin(LeafletGeoAdminMixin,ImportExportModelAdmin):
+    pass
+
+
+@admin.register(ProgramCategory)
+class ProgramCategoryAdmin(LeafletGeoAdminMixin,ImportExportModelAdmin):
+    pass
+
+
+@admin.register(Program)
+class ProgramAdmin(LeafletGeoAdminMixin,ImportExportModelAdmin):
+    pass
+
+
+@admin.register(Accreditation)
+class AccreditationAdmin(LeafletGeoAdminMixin,ImportExportModelAdmin):
+    pass
+
+
+@admin.register(ExamSeries)
+class ExamSeriesAdmin(LeafletGeoAdminMixin,ImportExportModelAdmin):
+    pass
