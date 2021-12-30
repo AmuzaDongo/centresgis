@@ -7,7 +7,7 @@ db.sqlite3
 **/migrations/**
 # C extensions
 *.so
-
+**/vscode/**
 # Distribution / packaging
 .Python
 build/

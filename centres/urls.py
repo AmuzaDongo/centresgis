@@ -2,6 +2,11 @@ from django.urls import path
 from .views import centresview, stationsview, CentreCreateView, CentreUpdateView, CentresViewSet
 from rest_framework import routers
 
+
+site_header = "UBTEB Centres Admin"
+site_title = "UBTEB Centres Portal"
+index_title = "Welcome to UBTEB Admin Portal"
+
 router = routers.SimpleRouter()
 
 

@@ -139,8 +139,8 @@ class ExamSeries(models.Model):
 
 
 class Accreditation(models.Model):
-    centreno = models.ForeignKey(Centres, on_delete=models.DO_NOTHING, null=True, blank=True)
-    Program = models.ForeignKey(Program, on_delete= models.DO_NOTHING, null=True, blank=True)
+    centreno = models.ForeignKey(Centres, related_name="centreprograms", on_delete=models.DO_NOTHING, null=True, blank=True)
+    Program = models.ForeignKey(Program, related_name="programcentres", on_delete= models.DO_NOTHING, null=True, blank=True)
     expiry = models.DateField(default=datetime.date(2022,6,15))
 
     class Meta:
