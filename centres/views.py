@@ -3,7 +3,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from rest_framework import serializers
-from .models import Centres, PoliceStation
+from .models import Centres, PoliceStation, ProgramCategory, Region
 from .forms import centresForm
 
 
@@ -53,7 +53,7 @@ class CentreUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 
 from rest_framework.viewsets import ReadOnlyModelViewSet
-from centres.serializers import CentresSerializer
+from centres.serializers import CentresSerializer, RegionSerializer, ProgramCategorySerializer
 from rest_framework.filters import OrderingFilter, SearchFilter
 
 class CentresViewSet(ReadOnlyModelViewSet):
@@ -61,3 +61,23 @@ class CentresViewSet(ReadOnlyModelViewSet):
     serializer_class = CentresSerializer
     filter_backend = (SearchFilter, OrderingFilter)
     serach_fields = ['centreno', 'centrename', 'station__stnno', 'station__stn_name']
+
+
+class RegionViewSet(ReadOnlyModelViewSet):
+    queryset = Region.objects.all()
+    serializer_class = RegionSerializer
+    filter_backend = (SearchFilter, OrderingFilter)
+    serach_fields = ['region_name']
+
+class ProgramCategoryViewSet(ReadOnlyModelViewSet):
+    queryset = ProgramCategory.objects.all()
+    serializer_class = ProgramCategorySerializer
+    filter_backend = (SearchFilter, OrderingFilter)
+    serach_fields = ['cat_name','dep_name']
+
+
+class ProgramCategoryViewSet(ReadOnlyModelViewSet):
+    queryset = ProgramCategory.objects.all()
+    serializer_class = ProgramCategorySerializer
+    filter_backend = (SearchFilter, OrderingFilter)
+    serach_fields = ['cat_name','dep_name']

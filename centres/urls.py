@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import centresview, stationsview, CentreCreateView, CentreUpdateView, CentresViewSet
+from .views import centresview, stationsview, CentreCreateView, CentreUpdateView, CentresViewSet, RegionViewSet, ProgramCategoryViewSet
 from rest_framework import routers
 
 
@@ -11,6 +11,8 @@ router = routers.SimpleRouter()
 
 
 router.register(r'api/centres', CentresViewSet, basename="centres-api")
+router.register(r'api/programcategories', ProgramCategoryViewSet, basename="centres-api")
+router.register(r'api/regions', RegionViewSet, basename="centres-api")
     
 urlpatterns = [
     path("", centresview, name='home'),

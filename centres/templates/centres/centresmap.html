@@ -12,7 +12,7 @@
 <div class="row">
 <span class='py-2'>{% crispy form form.helper %}</span>
 </div>
-<div class="row">
+{% comment %} <div class="row">
     <a class="btn btn-secondary" href="{% url 'staions-home' %}">Police Stations</a>
     <table class='table table-hover table-sm'>
     <tr><td>#</td><td>CentreNo</td><td>CentreName</td><td>Station Name</td></tr>
@@ -20,7 +20,7 @@
     <tr><td>{{forloop.counter}}</td><td>{{centre.centreno}}</td><td>{{centre.centrename}}</td><td>{{centre.station}}</td></tr>
     {% endfor %}
     </table>
-</div>
+</div> {% endcomment %}
 <div class="row">
 <div class="col">
     <h1>Map of centres</h1>
@@ -33,12 +33,11 @@
             {% for centre in centreslist %}
             var lon = "{{ centre.location.x }}";
             var lat = "{{ centre.location.y }}";
-            var popup = L.popup({closeOnClick: false, autoClose: false}).setContent("{{ centre.centrename}}")
+            var popup = L.popup({closeOnClick: true, autoClose: true}).setContent(                    
+            "<h3>{{ centre.centrename}}</h3>  {% for prg in centre.centreprograms.all %}<p>{{prg.Program}}</p>{% endfor %}")
             // zoom to point & add it to map
             {% comment %} var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup(); {% endcomment %}
-            var marker = L.marker([lat, lon]).addTo(map).bindPopup("{{ centre.centrename}}");
-            var marker = L.marker([lat, lon]).addTo(map)
-            marker.on('mouseover',function(ev) {ev.target.openPopup("{{ centre.centrename}}");});
+            var marker = L.circle([lat, lon], 100).addTo(map).bindPopup(popup);
             {% endfor %}
             }
     </script>
