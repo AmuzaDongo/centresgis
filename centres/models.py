@@ -1,3 +1,5 @@
+from pyexpat import model
+from statistics import mode
 from tabnanny import verbose
 from django.db import models
 from django.contrib.gis.db import models
@@ -13,17 +15,20 @@ class Region(models.Model):
 
     def __str__(self):
         return f"{self.region_name}"
-
+class Bank(models.Model):
+    bank_name = models.CharField(max_length=100)
 
 class person(models.Model):
 
     fullname = models.CharField(max_length=200)
-    min_no = models.CharField(max_length=50)
-    email = models.EmailField(max_length=254)
     phoneno1 = models.CharField(max_length=12,null=True, blank=True, unique=True)
     phoneno2 = models.CharField(max_length=12,null=True, blank=True, unique=True)
     Phoneno3 = models.CharField(max_length=12,null=True, blank=True, unique=True)
-    notes = models.CharField(max_length=500, default="")
+    bank = models.ForeignKey(Bank, null=True, blank=True, on_delete=models.DO_NOTHING)
+    bank_branch = models.CharField(max_length=200, null=True , blank=True)
+    min_no = models.CharField(max_length=50,null=True, blank=True, unique=True)
+    email = models.EmailField(max_length=254,null=True, blank=True, unique=True)
+    notes = models.CharField(max_length=500, default="",null=True, blank=True)
 
     class Meta:
         verbose_name = "person"
