@@ -15,10 +15,7 @@ class AccreditationSerializer(serializers.ModelSerializer):
     prg_name = serializers.CharField(source='Program.prg_name')
     class Meta:
         model = Accreditation
-        # fields = '__all__'
         fields = ['centreno','Program','prg_code','prg_name']
-
-
 
 class CentresSerializer(serializers.ModelSerializer):
     station = PoliceStationSerializer()

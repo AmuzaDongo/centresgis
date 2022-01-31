@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from django.contrib.gis.db import models
 from django.urls import reverse
@@ -19,9 +20,9 @@ class person(models.Model):
     fullname = models.CharField(max_length=200)
     min_no = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
-    Phoneno3 = models.CharField(max_length=12,null=True, blank=True, unique=True)
-    phoneno2 = models.CharField(max_length=12,null=True, blank=True, unique=True)
     phoneno1 = models.CharField(max_length=12,null=True, blank=True, unique=True)
+    phoneno2 = models.CharField(max_length=12,null=True, blank=True, unique=True)
+    Phoneno3 = models.CharField(max_length=12,null=True, blank=True, unique=True)
     notes = models.CharField(max_length=500, default="")
 
     class Meta:
@@ -36,7 +37,7 @@ class person(models.Model):
 
 
 class District(models.Model):
-    district_name = models.CharField(max_length=100)
+    district_name = models.CharField(max_length=100, null=True, blank=True)
     distric_area = models.PolygonField(srid=4326, blank=True, null=True)
     district_notes = models.TextField(default="")
     district_centre = models.PointField(srid=4326, blank=True, null=True)
@@ -55,6 +56,11 @@ class PoliceStation(models.Model):
 
     def __str__(self):
         return f"{self.stnno} - {self.stn_name}"
+
+    class Meta:
+        ordering = ['stnno']
+        verbose_name = 'Station'
+        verbose_name_plural = 'Stations'
 
 class Centres(models.Model):
     class Ownership(models.IntegerChoices):
@@ -131,6 +137,7 @@ class ExamSeries(models.Model):
     series_name = models.CharField(max_length=50)
 
     class Meta:
+            ordering = ['id']
             verbose_name = "ExamSeries"
             verbose_name_plural = "ExamSeries"
     

@@ -3,16 +3,19 @@ from django.db.models.base import Model
 from leaflet.admin import LeafletGeoAdmin, LeafletGeoAdminMixin
 from django.urls import reverse
 from django.contrib import admin
-from .models import Accreditation, Department, ExamSeries, Program, ProgramCategory, Region, PoliceStation, Centres, District
+from .models import Accreditation, Department, ExamSeries, Program, ProgramCategory, Region, PoliceStation, Centres, District, person
 from import_export.admin import ImportExportModelAdmin
 from django.utils.http import urlencode
 from django.utils.html import format_html
 
 
 
-# @admin.register(Centres)
-# class CentresAdmin(ImportExportModelAdmin):
-    
+@admin.register(person)
+class personAdmin(ImportExportModelAdmin):    
+    list_display = ("fullname", "email", "notes",)
+
+
+
 #     list_display = ("centreno", "centrename", "station","view_Programs_link","location","district","owner","centre_head","centre_registrar","accreditation_staus","accreditation_expiry")
 #     # list_filter = ("prg_code","prg_category" )
 #     # search_fields = ("prgcode__startswith", )
@@ -56,7 +59,7 @@ class AccreditationInline(admin.TabularInline):
 
 @admin.register(Centres)
 class CentresAdmin(LeafletGeoAdmin, ImportExportModelAdmin):
-    list_display = ("centreno", "centrename","centre_head", "location", "station","owner","accreditation_staus")
+    list_display = ("centreno", "centrename","centre_head",'centre_registrar', "location", "station","owner","accreditation_staus")
     search_fields = ['centreno','centrename']
     list_filter = [LocationFilter,'owner','accreditation_staus','accreditation_staus',"station"]
     # list_editable = ['owner','accreditation_staus','location']
