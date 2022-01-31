@@ -1,6 +1,3 @@
-from pyexpat import model
-from statistics import mode
-from tabnanny import verbose
 from django.db import models
 from django.contrib.gis.db import models
 from django.urls import reverse
@@ -15,8 +12,16 @@ class Region(models.Model):
 
     def __str__(self):
         return f"{self.region_name}"
+        
 class Bank(models.Model):
     bank_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.bank_name}"
+
+    class Meta:
+        ordering = ['id']
+
 
 class person(models.Model):
 
