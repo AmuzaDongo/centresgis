@@ -41,7 +41,7 @@ class person(models.Model):
         verbose_name_plural = "persons"
 
     def __str__(self):
-        return "{self.fullname} - {self.phoneno1}" 
+        return f"{self.fullname} - {self.phoneno1}" 
         # //todo make returned phone no if available
 
     def get_absolute_url(self):
