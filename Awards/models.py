@@ -7,8 +7,8 @@ class Committee(models.Model):
     
 
     class Meta:
-        verbose_name = _("committee")
-        verbose_name_plural = _("committees")
+        verbose_name = "committee"
+        verbose_name_plural = "committees"
 
     def __str__(self):
         return self.committeename

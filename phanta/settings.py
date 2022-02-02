@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'centres',
     'supervision',
-    'awards',
+    'Awards',
 ]
 
 MIDDLEWARE = [
