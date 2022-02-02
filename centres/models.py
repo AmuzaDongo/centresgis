@@ -1,3 +1,4 @@
+from curses.ascii import isblank
 from django.db import models
 from django.contrib.gis.db import models
 from django.urls import reverse
@@ -40,7 +41,8 @@ class person(models.Model):
         verbose_name_plural = "persons"
 
     def __str__(self):
-        return self.fullname
+        return "{self.fullname} - {self.phoneno1}" 
+        # //todo make returned phone no if available
 
     def get_absolute_url(self):
         return reverse("person_detail", kwargs={"pk": self.pk})

@@ -112,8 +112,8 @@ class MalpracticeTypes(models.Model):
     malpractice = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name = "Malpractice"
-        verbose_name_plural = "Malpractices"
+        verbose_name = "Malpractice Type"
+        verbose_name_plural = "Malpractice Types"
 
     def __str__(self):
         return self.malpractice
@@ -129,8 +129,8 @@ class ExamMalpractices(models.Model):
     notes = models.TextField()
 
     class Meta:
-        verbose_name = "exammalpractices"
-        verbose_name_plural = "exammalpracticess"
+        verbose_name = "Exam Malpractices"
+        verbose_name_plural = "Exammal Practices"
 
     def __str__(self):
         return self.name

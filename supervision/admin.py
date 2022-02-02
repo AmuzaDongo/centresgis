@@ -50,10 +50,10 @@ class ExamSessionAdmin(ImportExportModelAdmin):
 
 @admin.register(MalpracticeTypes)
 class MalpracticeTypesAdmin(ImportExportModelAdmin):
-    list_display= [field.name for field in MalpracticeTypes._meta.get_fields()]
+    pass
 
 
 @admin.register(ExamMalpractices)
 class ExamMalpracticesAdmin(ImportExportModelAdmin):
-    list_display= [field.name for field in ExamMalpractices._meta.get_fields()]
+    pass
 
