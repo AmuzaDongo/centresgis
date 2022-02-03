@@ -35,7 +35,7 @@ def Programsview(request):
         form =ProgramsForm(request.POST)
         if form.is_valid():
             program_val = request.POST['program']
-            Programsfilters = {'Program_id' : 212}
+            Programsfilters = {'Program_id' : program_val}
             incarguments = {}
             for k, v in Programsfilters.items():
                 if v:
@@ -45,7 +45,7 @@ def Programsview(request):
     else:
         Programsqueryset = Centres.objects.exclude(location__isnull=True)
         form = ProgramsForm()
-    context = {'form': form,'centreslist':Programsqueryset}
+    context = {'form': form,'Programsqueryset':Programsqueryset}
     return render(request,"centres/programsmap.html", context)
 
 
