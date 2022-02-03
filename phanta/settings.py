@@ -141,7 +141,7 @@ LEAFLET_CONFIG = {
     'TILES': 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     'DEFAULT_CENTER':(0.919075802, 32.58531551),
     'DEFAULT_ZOOM': 6,
-    'MIN_ZOOM': 5,
+    'MIN_ZOOM': 6,
     'MAX_ZOOM': 18,
     'DEFAULT_PRECISION': 6,
     'SCALE': 'both',
@@ -159,3 +159,6 @@ LOGIN_URL = 'login'
 
 USE_THOUSAND_SEPARATOR = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

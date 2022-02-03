@@ -2,13 +2,20 @@ from importlib import resources
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 
-from .models import ExamMalpractices, ExamSession, MalpracticeTypes, Recconoiter, Timetable, session, TimetableCategory
+from .models import Absentee, ExamMalpractices, ExamSession, MalpracticeTypes, Recconoiter, Timetable, session, TimetableCategory
 
 # Register your models here.
 @admin.register(session)
 class SessionAdmin(ImportExportModelAdmin):
     # list_display = [field.name for field in session._meta.get_fields()]
     pass
+
+class ExamMalpracticesInline(admin.TabularInline):
+    model = ExamMalpractices
+
+
+class AbsenteeInline(admin.TabularInline):
+    model = Absentee
 
 
 @admin.register(TimetableCategory)
@@ -22,7 +29,7 @@ class TimetableAdmin(ImportExportModelAdmin):
     # list_display = [field.name for field in Timetable._meta.get_fields()]
     list_display = ['examid','examcode','examname','day','period','exam_phase','category','ispractical']
     search_fields = ["examcode", "examname"]
-    list_filter = ['day','category','exam_phase','exam_phase',]
+    list_filter = ['day','category','exam_phase','period',]   
 
 
 @admin.register(Recconoiter)
@@ -36,6 +43,8 @@ class ExamSessionAdmin(ImportExportModelAdmin):
     # list_display = ['centre','paper','paper__day','paper__period','candidates',]
     list_display = ['centre','paper','candidates',]
     # resource_class = ExamsessionAdminResource
+
+    inlines = [ExamMalpracticesInline, AbsenteeInline]
     
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
@@ -53,7 +62,4 @@ class MalpracticeTypesAdmin(ImportExportModelAdmin):
     pass
 
 
-@admin.register(ExamMalpractices)
-class ExamMalpracticesAdmin(ImportExportModelAdmin):
-    pass
 

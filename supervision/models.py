@@ -1,9 +1,6 @@
-from email.policy import default
-from enum import unique
-from random import choices
 from django.db import models
 
-from centres.models import Centres, ExamSeries, Centres
+from centres.models import Centres, ExamSeries, Centres, Program
 from django.contrib.auth.models import User
 # Create your models here.
 
@@ -74,8 +71,6 @@ class Timetable(models.Model):
     category = models.ForeignKey(TimetableCategory, related_name="categorypapers", on_delete=models.CASCADE)
     ispractical = models.BooleanField(default=False)
     grading_notes = models.TextField(default="")
-    reccomendations = models.TextField(default="")
-    challenges = models.TextField(default="")
 
     class Meta:
         ordering = ['examid']
@@ -83,18 +78,25 @@ class Timetable(models.Model):
         verbose_name_plural = "timetables"
 
     def __str__(self):
-        return f"{self.examid} - {self.examcode} - {self.examname}"
+        return f"{self.examcode} - {self.examname} on {self.day}"
 
     # def get_absolute_url(self):
     #     return reverse("timetable_detail", kwargs={"pk": self.pk})
-
 
 
 class ExamSession(models.Model):
 
     centre = models.ForeignKey(Centres, related_name="centresessions", on_delete=models.CASCADE)
     paper = models.ForeignKey(Timetable, related_name="paperssesions", on_delete=models.CASCADE)
-    candidates = models.PositiveIntegerField(default=0)
+    candidates = models.PositiveIntegerField(default=0, verbose_name="Question Papers Packed")
+    male_candidates = models.PositiveIntegerField(null= True, blank=True)
+    female_candidates = models.PositiveIntegerField(null= True, blank=True)
+    total_candidates = models.PositiveIntegerField(null= True, blank=True)
+    exam_room = models.CharField(max_length=200, null=True, blank=True)
+    supervisor = models.TextField(blank=True, null=True, help_text="Seperate with commas")
+    attendance = models.ImageField(upload_to='Attendances', null = True, blank=True)
+    sitting_plan = models.ImageField(upload_to='SittingPlans', null=True, blank=True)
+
 
     class Meta:
         verbose_name = "examsession"
@@ -123,17 +125,34 @@ class MalpracticeTypes(models.Model):
 
 class ExamMalpractices(models.Model):
 
-    ExamSession = models.ForeignKey(ExamSession, related_name="malpractices", on_delete=models.CASCADE)
-    Malpracticetype = models.ForeignKey(MalpracticeTypes, related_name="malpractices", on_delete=models.CASCADE)
-    Reg_details = models.TextField(help_text="Regno names Program")
-    notes = models.TextField()
+    examSession = models.ForeignKey(ExamSession, related_name="malpractices", on_delete=models.CASCADE)
+    malpracticetype = models.ForeignKey(MalpracticeTypes, related_name="malpractices", on_delete=models.CASCADE, null= True, blank=True)
+    reg_details = models.TextField(help_text="Regno names Program", null= True, blank=True)
+    notes = models.TextField(null= True, blank=True)
 
     class Meta:
         verbose_name = "Exam Malpractices"
         verbose_name_plural = "Exammal Practices"
 
     def __str__(self):
-        return self.name
+        return f"{self.examSession} - {self.malpracticetype}"
 
     # def get_absolute_url(self):
     #     return reverse("exammalpractices_detail", kwargs={"pk": self.pk})
+
+class Absentee(models.Model):
+    examsession = models.ForeignKey(ExamSession, related_name="Absentees", on_delete=models.DO_NOTHING, )
+    regno = models.CharField(max_length=100, null= True, blank=True)
+    names = models.CharField(max_length=100, null= True, blank=True)
+    evidence = models.ImageField(upload_to='Evidences', null = True, blank=True)
+        
+
+    class Meta:
+        verbose_name = "Absentes"
+        verbose_name_plural = "Absentees"
+
+    def __str__(self):
+        return f"{self.regno} - {self.names} "
+
+    # def get_absolute_url(self):
+    #     return reverse("absentees_detail", kwargs={"pk": self.pk})

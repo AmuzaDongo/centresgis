@@ -1,4 +1,5 @@
 from curses.ascii import isblank
+from tabnanny import verbose
 from django.db import models
 from django.contrib.gis.db import models
 from django.urls import reverse
@@ -86,14 +87,14 @@ class Centres(models.Model):
         PROVISIONAL = 1
         FULL =2
 
-    centreno = models.CharField(max_length=10, unique=True)
+    centreno = models.CharField(max_length=50, unique=True)
     centrename = models.CharField(max_length=500)
     location = models.PointField(srid=4326, blank=True, null=True)
     station = models.ForeignKey(PoliceStation, on_delete=models.DO_NOTHING, null=True, blank=True)
     owner = models.IntegerField(choices=Ownership.choices, default=1)
     centre_head = models.ForeignKey(to=person,related_name="princpal", on_delete=models.DO_NOTHING, null=True, blank=True)
     centre_registrar = models.ForeignKey(to=person, related_name="registrar", on_delete=models.DO_NOTHING , null=True, blank=True)
-    accreditation_staus = models.IntegerField(choices=AccreditationStatus.choices, default=1)
+    accreditation_staus = models.IntegerField(choices=AccreditationStatus.choices, default=1, verbose_name="Accreditation Status")
     accreditation_expiry = models.DateField(default=datetime.date(2022,6,15))
     tr_centre = models.PositiveIntegerField(default=50000)
     tr_kla = models.PositiveIntegerField(default=100000)

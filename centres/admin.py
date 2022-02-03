@@ -12,8 +12,9 @@ from django.utils.html import format_html
 
 @admin.register(person)
 class personAdmin(ImportExportModelAdmin):    
-    list_display = ("fullname", "email", "notes",)
+    list_display = ("fullname", 'phoneno1','phoneno2','Phoneno3','bank','bank_branch','min_no','email','notes',)
 
+    
 @admin.register(Bank)
 class BankAdmin(ImportExportModelAdmin):
     pass

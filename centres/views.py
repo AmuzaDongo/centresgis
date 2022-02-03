@@ -3,8 +3,8 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from rest_framework import serializers
-from .models import Centres, PoliceStation, ProgramCategory, Region
-from .forms import centresForm
+from .models import Accreditation, Centres, PoliceStation, Program, ProgramCategory, Region
+from .forms import centresForm, ProgramsForm
 
 
 # Create your views here.
@@ -28,6 +28,25 @@ def centresview(request):
         form = centresForm()
     context = {'form': form,'centreslist':centresqueryset}
     return render(request,"centres/centresmap.html", context)
+
+
+def Programsview(request):
+    if request.method == "POST":
+        form =ProgramsForm(request.POST)
+        if form.is_valid():
+            program_val = request.POST['program']
+            Programsfilters = {'Program' : program_val}
+            incarguments = {}
+            for k, v in Programsfilters.items():
+                if v:
+                    incarguments[k] = v
+            Programsqueryset = Accreditation.objects.filter(**incarguments)
+
+    else:
+        Programsqueryset = Centres.objects.exclude(location__isnull=True)
+        form = ProgramsForm()
+    context = {'form': form,'centreslist':Programsqueryset}
+    return render(request,"centres/programsmap.html", context)
 
 
 class CentresListView(ListView):
