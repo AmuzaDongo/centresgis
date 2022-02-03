@@ -35,12 +35,12 @@ def Programsview(request):
         form =ProgramsForm(request.POST)
         if form.is_valid():
             program_val = request.POST['program']
-            Programsfilters = {'Program' : program_val}
+            Programsfilters = {'Program_id' : 212}
             incarguments = {}
             for k, v in Programsfilters.items():
                 if v:
                     incarguments[k] = v
-            Programsqueryset = Accreditation.objects.filter(**incarguments)
+            Programsqueryset = Accreditation.objects.filter(Program_id=program_val)
 
     else:
         Programsqueryset = Centres.objects.exclude(location__isnull=True)
