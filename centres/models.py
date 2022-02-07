@@ -38,6 +38,7 @@ class person(models.Model):
     notes = models.CharField(max_length=500, default="",null=True, blank=True)
 
     class Meta:
+        ordering = ['fullname']
         verbose_name = "person"
         verbose_name_plural = "persons"
 
@@ -139,6 +140,7 @@ class Program(models.Model):
     prg_category = models.ForeignKey(ProgramCategory, on_delete=models.DO_NOTHING, null=True, blank=True)
     
     class Meta:
+        ordering = ['prg_code']
         verbose_name = "Program"
         verbose_name_plural = "Programs"
 

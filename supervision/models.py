@@ -99,6 +99,7 @@ class ExamSession(models.Model):
 
 
     class Meta:
+        ordering = ['centre__centreno','paper__day', 'paper__period']
         verbose_name = "examsession"
         verbose_name_plural = "examsessions"
 

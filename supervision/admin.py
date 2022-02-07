@@ -56,7 +56,6 @@ class ExamSessionAdmin(ImportExportModelAdmin):
 
 
 
-
 @admin.register(MalpracticeTypes)
 class MalpracticeTypesAdmin(ImportExportModelAdmin):
     pass
