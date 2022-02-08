@@ -29,8 +29,8 @@ class TimetableAdmin(ImportExportModelAdmin):
     # list_display = [field.name for field in Timetable._meta.get_fields()]
     list_display = ['examid','examcode','examname','day','period','exam_phase','category','ispractical']
     search_fields = ["examcode", "examname"]
-    list_filter = ['day','category','exam_phase','period',]   
-
+    list_filter = ['day','category','exam_phase','period',]
+    
 
 @admin.register(Recconoiter)
 class RecconoiterAdmin(ImportExportModelAdmin):
@@ -53,7 +53,6 @@ class ExamSessionAdmin(ImportExportModelAdmin):
             print(user_centre)
             queryset= queryset.filter(centre=user_centre.centre)
         return queryset
-
 
 
 @admin.register(MalpracticeTypes)
