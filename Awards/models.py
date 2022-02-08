@@ -11,7 +11,7 @@ class Committee(models.Model):
     committee_day = models.CharField(max_length=50)
 
     class Meta:
-        unique_together = ['series',committee_name,'committee_day']
+        unique_together = ['series','committee_name','committee_day']
         verbose_name = "committee"
         verbose_name_plural = "committee"
 
@@ -21,14 +21,23 @@ class Committee(models.Model):
     # def get_absolute_url(self):
     #     return reverse("committee_detail", kwargs={"pk": self.pk})
 
+class PaperDepartment(models.Model):
+    paper_dept = models.CharField(max_length=50)    
 
-class Committee(models.Model):
-    committe_letter = models.CharField(max_length=50)
+    class Meta:
+        verbose_name = "PaperDepartment"
+        verbose_name_plural = "PaperDepartment"
 
+    def __str__(self):
+        return self.paper_dept
+    
+     # def get_absolute_url(self):
+    #     return reverse("Paperfields_detail", kwargs={"pk": self.pk})
 
 class AwardsPapers(models.Model):
     paper = models.OneToOneField(Timetable, verbose_name='Awards Paper', on_delete=models.CASCADE)
-    Committee = models.ForeignKey()
+    committee = models.ForeignKey(to=Committee,related_name='comm_papers', on_delete=models.DO_NOTHING)
+    committe_trade = models.ManyToManyField(to=PaperDepartment,related_name='trades')
     
 
     class Meta:
@@ -36,7 +45,7 @@ class AwardsPapers(models.Model):
         verbose_name_plural = "Awards"
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.committee}'
 
     # def get_absolute_url(self):
     #     return reverse("awardspapers_detail", kwargs={"pk": self.pk})
