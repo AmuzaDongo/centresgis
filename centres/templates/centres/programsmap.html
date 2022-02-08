@@ -38,7 +38,7 @@
             
             // zoom to point & add it to map
             {% comment %} var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup(); {% endcomment %}
-            var marker = L.circle([lat, lon], 100).addTo(map).bindPopup(popup);
+            var marker = L.circleMarker([lat, lon],{radius:4}).addTo(map).bindPopup(popup);
             {% endfor %}
             }
     </script>

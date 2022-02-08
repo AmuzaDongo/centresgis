@@ -37,7 +37,7 @@
             "<h5>{{ centre.centrename}}</h5> Programs Offered {% for prg in centre.centreprograms.all %}<p>{{prg.Program}}</p>{% endfor %}")
             // zoom to point & add it to map
             {% comment %} var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup(); {% endcomment %}
-            var marker = L.circle([lat, lon], 100).addTo(map).bindPopup(popup);
+            var marker = L.circleMarker([lat, lon],{radius:4}).addTo(map).bindPopup(popup);
             {% endfor %}
             }
     </script>
