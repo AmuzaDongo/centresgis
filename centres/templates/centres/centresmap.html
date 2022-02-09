@@ -8,7 +8,23 @@
 
 {% leaflet_js %}
 {% leaflet_css %}    
+<style>
 
+    .leaflet-container {  /* all maps */
+        width:  100%%;
+        height: 900px;
+    }
+
+    #specialbigmap {
+        height: 800px;
+    }
+
+    /* Resize the "display_raw" textbox */
+    .django-leaflet-raw-textarea {
+        width: 100%;
+    }
+
+</style>
 <div class="row">
 <span class='py-2'>{% crispy form form.helper %}</span>
 </div>
@@ -22,9 +38,9 @@
     </table>
 </div> {% endcomment %}
 <div class="row">
-    <div class="col" style="height: 100%; width= 100% ">
+    <div class="col" style="height: 150%; width= 100% ">
         <h3>Map of centres</h3>
-        <div id="map">
+        <div id="yourmap">
             {% leaflet_map "yourmap" callback="window.map_init_basic" %}
         </div>
     </div>
