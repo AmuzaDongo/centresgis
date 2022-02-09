@@ -7,7 +7,25 @@
 
 
 {% leaflet_js %}
-{% leaflet_css %}    
+{% leaflet_css %}   
+
+<style>
+
+    .leaflet-container {  /* all maps */
+        width:  100%%;
+        height: 900px;
+    }
+
+    #specialbigmap {
+        height: 800px;
+    }
+
+    /* Resize the "display_raw" textbox */
+    .django-leaflet-raw-textarea {
+        width: 100%;
+    }
+
+</style>
 
 <div class="row">
 <span class='py-2'>{% crispy form form.helper %}</span>
@@ -35,11 +53,7 @@
             {% for item in Programsqueryset %}
             var lon = "{{ item.centreno.location.x }}";
             var lat = "{{ item.centreno.location.y }}";
-            var popup = L.popup({closeOnClick: true, autoClose: true}).setContent(                    
-            "<h5>{{ item.centreno.centrename}}</h5>")
-            
-            // zoom to point & add it to map
-            {% comment %} var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup(); {% endcomment %}
+            var popup = L.popup({closeOnClick: true, autoClose: true}).setContent("<h5>{{ item.centreno.centreno}} - {{ item.centreno.centrename}}</h5>")
             var marker = L.circleMarker([lat, lon],{radius:4}).addTo(map).bindPopup(popup);
             {% endfor %}
             }

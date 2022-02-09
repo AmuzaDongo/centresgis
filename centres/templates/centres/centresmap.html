@@ -52,7 +52,7 @@
             var lon = "{{ centre.location.x }}";
             var lat = "{{ centre.location.y }}";
             var popup = L.popup({closeOnClick: true, autoClose: true}).setContent(                    
-            "<h5>{{ centre.centrename}}</h5> Programs Offered {% for prg in centre.centreprograms.all %}<p>{{prg.Program}}</p>{% endfor %}")
+            "<h6 my-1 py-1>{{ centre.centreno}} - {{ centre.centrename}}</h5> <strong my-1 py-1>Programs Offered; </strong> {% for prg in centre.centreprograms.all %}<p py-1 my-1>{{prg.Program}}</p>{% endfor %}")
             // zoom to point & add it to map
             {% comment %} var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup(); {% endcomment %}
             var marker = L.circleMarker([lat, lon],{radius:4}).addTo(map).bindPopup(popup);
