@@ -76,6 +76,21 @@ class PoliceStation(models.Model):
         verbose_name = 'Station'
         verbose_name_plural = 'Stations'
 
+class OwnsershipStatus(models.Model):
+    owner = models.CharField(max_length=50)
+    map_color = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = "ownsership"
+        verbose_name_plural = "ownsership"
+
+    def __str__(self):
+        return self.owner
+
+    # def get_absolute_url(self):
+    #     return reverse("ownsershipstatus_detail", kwargs={"pk": self.pk})
+
+
 class Centres(models.Model):
     class Ownership(models.IntegerChoices):
         DORMANT = 0
@@ -93,6 +108,7 @@ class Centres(models.Model):
     location = models.PointField(srid=4326, blank=True, null=True)
     station = models.ForeignKey(PoliceStation, on_delete=models.DO_NOTHING, null=True, blank=True)
     owner = models.IntegerField(choices=Ownership.choices, default=1)
+    ownership = models.ForeignKey(OwnsershipStatus,related_name='centre_Owner',on_delete=models.DO_NOTHING, null=True,blank=True)
     centre_head = models.ForeignKey(to=person,related_name="princpal", on_delete=models.DO_NOTHING, null=True, blank=True)
     centre_registrar = models.ForeignKey(to=person, related_name="registrar", on_delete=models.DO_NOTHING , null=True, blank=True)
     accreditation_staus = models.IntegerField(choices=AccreditationStatus.choices, default=1, verbose_name="Accreditation Status")

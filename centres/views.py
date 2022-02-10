@@ -15,7 +15,7 @@ def centresview(request):
             station = request.POST['station']
             district = request.POST['district']
             region = request.POST['region']
-            program = request.POST['program']
+            # program = request.POST['program']
             centresfilters = {'station_id' : station, 'district_id' : district, 'station__region_id' : region}
             incarguments = {}
             for k, v in centresfilters.items():

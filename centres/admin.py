@@ -3,8 +3,12 @@ from django.db.models.base import Model
 from leaflet.admin import LeafletGeoAdmin, LeafletGeoAdminMixin
 from django.urls import reverse
 from django.contrib import admin
-from .models import Accreditation, Bank, Department, ExamSeries, Program, ProgramCategory, Region, PoliceStation, Centres, District, person
+
+
+from .models import Accreditation, Bank, Department, ExamSeries, OwnsershipStatus, Program, ProgramCategory, Region, PoliceStation, Centres, District, person
+
 from import_export.admin import ImportExportModelAdmin
+
 from django.utils.http import urlencode
 from django.utils.html import format_html
 
@@ -14,6 +18,11 @@ from django.utils.html import format_html
 class personAdmin(ImportExportModelAdmin):    
     list_display = ("fullname", 'phoneno1','phoneno2','Phoneno3','bank','bank_branch','min_no','email','notes',)
 
+
+@admin.register(OwnsershipStatus)
+class OwnsershipStatusAdmin(ImportExportModelAdmin):    
+    # list_display = ('owner','map_color')
+    pass
     
 @admin.register(Bank)
 class BankAdmin(ImportExportModelAdmin):

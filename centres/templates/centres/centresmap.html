@@ -55,7 +55,7 @@
             "<h6 my-1 py-1>{{ centre.centreno}} - {{ centre.centrename}}</h5> <strong my-1 py-1>Programs Offered; </strong> {% for prg in centre.centreprograms.all %}<p py-1 my-1>{{prg.Program}}</p>{% endfor %}")
             // zoom to point & add it to map
             {% comment %} var marker = L.circle([lat, lon]).addTo(map).bindPopup(popup).openPopup(); {% endcomment %}
-            var marker = L.circleMarker([lat, lon],{radius:4}).addTo(map).bindPopup(popup);
+            var marker = L.circleMarker([lat, lon],{radius:4, fillOpacity:1,color:'red',fillColor:'red'}).addTo(map).bindPopup(popup);
             {% endfor %}
             }
     </script>

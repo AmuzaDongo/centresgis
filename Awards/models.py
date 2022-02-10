@@ -6,9 +6,9 @@ from centres.models import ExamSeries
 # Create your models here.
 
 class Committee(models.Model):
-    series = models.ForeignKey(ExamSeries, verbose_name="Series", on_delete=models.DO_NOTHING)
+    series = models.ForeignKey(ExamSeries, verbose_name="Series", on_delete=models.DO_NOTHING, null=True,blank=True)
     committee_name = models.CharField(max_length=50)
-    committee_day = models.CharField(max_length=50)
+    committee_day = models.CharField(max_length=50,null=True,blank=True)
 
     class Meta:
         unique_together = ['series','committee_name','committee_day']
@@ -36,7 +36,7 @@ class PaperDepartment(models.Model):
 
 class AwardsPapers(models.Model):
     paper = models.OneToOneField(Timetable, verbose_name='Awards Paper', on_delete=models.CASCADE)
-    committee = models.ForeignKey(to=Committee,related_name='comm_papers', on_delete=models.DO_NOTHING)
+    committee = models.ForeignKey(to=Committee,related_name='comm_papers', on_delete=models.DO_NOTHING, null=True, blank=True)
     committe_trade = models.ManyToManyField(to=PaperDepartment,related_name='trades')
     
 
