@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LEAFLET_CONFIG = {
     'TILES': 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     'DEFAULT_CENTER':(0.919075802, 32.58531551),
-    'DEFAULT_ZOOM': 8,
+    'DEFAULT_ZOOM': 7,
     'MIN_ZOOM': 5,
     'MAX_ZOOM': 18,
     'DEFAULT_PRECISION': 6,

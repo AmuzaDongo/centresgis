@@ -91,7 +91,7 @@ class AccreditationInline(admin.TabularInline):
 
 @admin.register(Centres)
 class CentresAdmin(LeafletGeoAdmin, ImportExportModelAdmin):
-    list_display = ("centreno", "centrename","centre_head",'centre_registrar', "location", "station","owner","accreditation_staus")
+    list_display = ("centreno", "centrename","centre_head",'centre_registrar', "location", "station","owner",'ownership',"accreditation_staus")
     search_fields = ['centreno','centrename']
     list_filter = [LocationFilter,RegistrarFilter,'owner','accreditation_staus','accreditation_staus',"station"]
     # list_editable = ['owner','accreditation_staus','location']
