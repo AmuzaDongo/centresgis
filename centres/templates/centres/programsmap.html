@@ -9,39 +9,13 @@
 {% leaflet_js %}
 {% leaflet_css %}   
 
-<style>
-
-    .leaflet-container {  /* all maps */
-        width:  100%%;
-        height: 900px;
-    }
-
-    #specialbigmap {
-        height: 800px;
-    }
-
-    /* Resize the "display_raw" textbox */
-    .django-leaflet-raw-textarea {
-        width: 100%;
-    }
-
-</style>
-
 <div class="row">
-<span class='py-2'>{% crispy form form.helper %}</span>
+    <div class="col-12">
+        <span>{% crispy form form.helper %}</span>
+    </div>
 </div>
-{% comment %} <div class="row">
-    <a class="btn btn-secondary" href="{% url 'staions-home' %}">Police Stations</a>
-    <table class='table table-hover table-sm'>
-    <tr><td>#</td><td>CentreNo</td><td>CentreName</td><td>Station Name</td></tr>
-    {% for centre in centreslist %}
-    <tr><td>{{forloop.counter}}</td><td>{{centre.centreno}}</td><td>{{centre.centrename}}</td><td>{{centre.station}}</td></tr>
-    {% endfor %}
-    </table>
-</div> {% endcomment %}
 <div class="row">
-    <div class="col" style="height: 100%; width= 100% ">
-        <h3>Map of centres</h3>
+    <div class="col">
         <div id="map">
             {% leaflet_map "yourmap" callback="window.map_init_basic" %}
         </div>
@@ -54,7 +28,7 @@
             var lon = "{{ item.centreno.location.x }}";
             var lat = "{{ item.centreno.location.y }}";
             var popup = L.popup({closeOnClick: true, autoClose: true}).setContent("<h5>{{ item.centreno.centreno}} - {{ item.centreno.centrename}}</h5>")
-            var marker = L.circleMarker([lat, lon],{radius:4}).addTo(map).bindPopup(popup);
+            var marker = L.circleMarker([lat, lon],{radius:4, fillOpacity:1,color:"{{item.centreno.ownership.map_color}}",fillColor:"{{item.centreno.ownership.map_color}}"}).addTo(map).bindPopup(popup);
             {% endfor %}
             }
     </script>
